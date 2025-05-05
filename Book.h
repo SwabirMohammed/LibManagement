@@ -12,13 +12,18 @@ private:
 public:
     Book(const std::string& id, const std::string& t, const std::string& a, const std::string& g, bool borrowed = false) : LibraryItem(id, t, a), isBorrowed(false) {}
 
-    void display() const override;
+    void display() const override{
+        std::cout << "[Book] ID: " << itemID << std::endl;
+        std::cout << ", Title: " << title << std::endl;
+        std::cout << ", Author: " << author << std::endl;
+        std::cout << ", Borrowed: " << (isBorrowed ? "Yes" : "No") << std::endl;
+    }
 
     bool getStatus() const{
         return isBorrowed;
     }
 
-    void borrowItem() override{
+    void borrowItem() {
 
         if (isBorrowed)
         {
