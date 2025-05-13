@@ -9,8 +9,8 @@ private:
     std::string message;
 
 public:
-    LibraryException(const std::string& msg);
-    const char* what() const noexcept override;
+    LibraryException(const std::string& msg): message(msg) {}
+    const char* what() const noexcept override{ return message.c_str(); }
 };
 
 #endif // LIBRARY_EXCEPTION_H
