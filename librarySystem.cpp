@@ -13,40 +13,36 @@ LibrarySystem::~LibrarySystem() {
 
 void LibrarySystem::addItem(LibraryItem* item) {
     if (items.count(item->getID())) {
-        delete item; // Prevent memory leak if item already exists
+        delete item;
         throw LibraryException("Item with this ID already exists.");
     }
-    items[item->getID()] = item; // Add the item to the map
+    items[item->getID()] = item;
     std::cout << "Item '" << item->getTitle() << "' (ID: " << item->getID() << ") added successfully." << std::endl;
 }
 
-// Adds a new User to the system.
-// Throws LibraryException if a user with the same ID already exists.
 void LibrarySystem::addUser(const User& user) {
     if (users.count(user.getID())) {
         throw LibraryException("User with this ID already exists.");
     }
-    users[user.getID()] = user; // Add the user to the map
+    users[user.getID()] = user;
     std::cout << "User '" << user.getName() << "' (ID: " << user.getID() << ") added successfully." << std::endl;
 }
 
-// Handles the borrowing of an item by a user.
-// Validates user and item existence, checks if the item is a Book,
-// and updates statuses. Logs the transaction.
+//Logging of the transactions
 void LibrarySystem::borrowItem(const std::string& userID, const std::string& itemID) {
-    // Check if user exists
+    // Check whether the user exists
     if (users.find(userID) == users.end()) {
         logTransaction("Borrow", userID, itemID, "FAILED (User not found)");
         throw LibraryException("User not found.");
     }
-    User& user = users.at(userID); // Get reference to the user
+    User& user = users.at(userID); // Getting the reference from the user
 
-    // Check if item exists
+    // Check whether the item exists
     if (items.find(itemID) == items.end()) {
         logTransaction("Borrow", userID, itemID, "FAILED (Item not found)");
         throw LibraryException("Item not found.");
     }
-    LibraryItem* item = items.at(itemID); // Get pointer to the item
+    LibraryItem* item = items.at(itemID); // Pointer to the item
 
     // Attempt to dynamically cast to Book. Only books can be borrowed.
     Book* book = dynamic_cast<Book*>(item);
