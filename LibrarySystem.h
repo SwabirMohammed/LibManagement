@@ -16,7 +16,7 @@ private:
     std::map<std::string, User> users;
 
 public:
-    ~LibrarySystem(); // Responsible for deleting dynamically allocated items
+    ~LibrarySystem() = default; // Responsible for deleting dynamically allocated items
 
     void addItem(LibraryItem* item);
     void addUser(const User& user);
