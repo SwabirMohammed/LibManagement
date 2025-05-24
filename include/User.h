@@ -18,7 +18,6 @@ public:
     void listBorrowedItems() const;
 
     std::string getID() const;
-    std::string getName() const;
 
     bool operator==(const User& other) const;
 };

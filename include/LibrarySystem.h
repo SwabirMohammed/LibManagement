@@ -16,7 +16,7 @@ private:
     std::map<std::string, User> users;
 
 public:
-    ~LibrarySystem() = default; // Responsible for deleting dynamically allocated items
+    ~LibrarySystem();
 
     void addItem(LibraryItem* item);
     void addUser(const User& user);
@@ -27,7 +27,7 @@ public:
     void displayAllItems() const;
     void displayAllUsers() const;
 
-    void logTransaction(const std::string& action, const std::string& userID, const std::string& itemID) const;
+    void logTransaction(const std::string& action, const std::string& userID, const std::string& itemID) const; // Restored const
 };
 
 #endif // LIBRARY_SYSTEM_H
